@@ -15,4 +15,9 @@ router.get('/', (req, res) => {
     });
   });
 
+router.get('/upload', (req, res) => {
+    res.render('upload', { 
+      title: 'sadsda',
+    });
+  });
 module.exports = router;
