@@ -1,0 +1,44 @@
+{
+  "name": "sdg",
+  "version": "1.0.0",
+  "description": "sdg web application",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/franzxsu/sdg.git"
+  },
+  "keywords": [
+    "sdg",
+    "nodejs",
+    "express",
+    "nlp",
+    "roberta",
+    "expressjs",
+    "bootstrap"
+  ],
+  "author": "AP",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/franzxsu/sdg/issues"
+  },
+  "homepage": "https://github.com/franzxsu/sdg#readme",
+  "dependencies": {
+    "config": "^3.3.12",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.21.1",
+    "express-session": "^1.18.1",
+    "multer": "^1.4.5-lts.1",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
