@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/franzxsu/sdg#readme",
   "dependencies": {
+    "axios": "^1.7.7",
     "config": "^3.3.12",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
