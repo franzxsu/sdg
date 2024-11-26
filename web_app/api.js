@@ -35,7 +35,8 @@ class UNSDGApiService {
     }
   }
 
-  async getGoals(includeChildren = true) {
+  //set includeChildren to false para mas onti
+  async getGoals(includeChildren = false) {
     try {
       const response = await this.axiosInstance.get('/Goal/List', {
         params: {
