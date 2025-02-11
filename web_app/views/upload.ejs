@@ -3,16 +3,12 @@
    <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-      <title>Features - Brand</title>
+      <title>Upload SDG Reports</title>
       <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">
       <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
       <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
       <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
-      <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css">
-      <link rel="stylesheet" href="assets/css/Animation-Cards-1.css">
-      <link rel="stylesheet" href="assets/css/Animation-Cards.css">
-      <link rel="stylesheet" href="assets/css/Article-Cards.css">
       <link rel="stylesheet" href="assets/css/Drag--Drop-Upload-Form.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
       <link rel="stylesheet" href="assets/css/News-Cards-4-Columns-v2.css">
@@ -46,11 +42,63 @@
                               click here to browse
                            </div>
                         </div>
-                        <output id="list"></output><input id="files" multiple name="files[]" type="file" />
+                        <output id="list"></output>
+                        <form id="upload-form" action="/upload" method="POST" enctype="multipart/form-data">
+                           <input id="files" name="file" type="file" accept=".pdf" required />
+                           <button type="submit" class="btn btn-primary">Upload Report</button>
+                        </form>
                      </div>
                   </div>
-                  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-                  <script src="js/index.js"></script>
+                  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+                  <script>
+                     $(document).ready(function () {
+                        // Drag and drop functionality
+                        let dropArea = $('.drop');
+                        let fileInput = $('#files');
+
+                        dropArea.on('dragover', function (e) {
+                           e.preventDefault();
+                           e.stopPropagation();
+                           dropArea.addClass('drag-over');
+                        });
+
+                        dropArea.on('dragleave', function (e) {
+                           e.preventDefault();
+                           e.stopPropagation();
+                           dropArea.removeClass('drag-over');
+                        });
+
+                        dropArea.on('drop', function (e) {
+                           e.preventDefault();
+                           e.stopPropagation();
+                           dropArea.removeClass('drag-over');
+                           let files = e.originalEvent.dataTransfer.files;
+                           fileInput[0].files = files;
+                        });
+
+                        // Handle form submission
+                        $('#upload-form').submit(function (e) {
+                           e.preventDefault();
+
+                           const formData = new FormData(this);
+
+                           $.ajax({
+                              url: '/upload',
+                              type: 'POST',
+                              data: formData,
+                              contentType: false,
+                              processData: false,
+                              success: function (response) {
+                                 console.log('File uploaded successfully');
+                                 // Handle the response from the backend (e.g., predictions)
+                              },
+                              error: function (error) {
+                                 console.error('Error uploading file', error);
+                              }
+                           });
+                        });
+                     });
+                  </script>
                </section>
             </div>
          </section>

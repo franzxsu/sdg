@@ -1,6 +1,76 @@
 // module.exports = ;
 
 const axios = require('axios');
+const pdfParse = require('pdf-parse'); 
+const path = require('path');
+const fs = require('fs');
+
+//FLASK API BACKEND SHOULD BE RUNNNING
+const API_URL = 'http://127.0.0.1:5000/predict';
+
+// Function to extract text from PDF
+async function extractTextFromPDF(pdfPath) {
+  try {
+    const dataBuffer = fs.readFileSync(pdfPath);  // Read the PDF file
+    const pdfData = await pdfParse(dataBuffer);   // Extract text using pdf-parse
+    return pdfData.text;  // Return the extracted text
+  } catch (error) {
+    console.error('Error extracting text from PDF:', error);
+    return null;
+  }
+}
+
+async function getPredictionFromAPI(text) {
+  try {
+    const response = await axios.post(API_URL, { text });
+    console.log('Prediction Response:', response.data);  // Log the returned prediction data
+  } catch (error) {
+    console.error('Error calling API:', error);
+  }
+}
+
+
+// Function to handle file upload and prediction
+async function handleFileUpload(filePath) {
+  const extractedText = await extractTextFromPDF(filePath);  // Extract text from the uploaded PDF
+  if (extractedText) {
+    console.log('Extracted Text:', extractedText);  // Log the extracted text
+    await getPredictionFromAPI(extractedText);       // Send the extracted text to the API
+  } else {
+    console.log('No text extracted from the PDF.');
+  }
+}
+
+module.exports = { handleFileUpload };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 class UNSDGApiService {
   constructor() {
