@@ -4,9 +4,14 @@ const axios = require('axios');
 const pdfParse = require('pdf-parse'); 
 const path = require('path');
 const fs = require('fs');
+const config = require('config');
+
+const flaskHost = config.get('flask.host');
+const flaskPort = config.get('flask.port');
 
 //FLASK API BACKEND SHOULD BE RUNNNING
-const API_URL = 'http://127.0.0.1:5000/predict';
+const API_URL = `http://${flaskHost}:${flaskPort}/predict`;
+
 
 // Function to extract text from PDF
 async function extractTextFromPDF(pdfPath) {

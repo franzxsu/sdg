@@ -7,3 +7,5 @@ sdg compliance temp
 ## to run dev server (nodemon)
 
 ```npm run dev```
+
+ENSURE THAT THE FLASK SERVER IS RUNNING AT PORT:5000
