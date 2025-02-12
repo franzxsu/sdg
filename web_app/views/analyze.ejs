@@ -25,22 +25,31 @@
           </form>
 
           <!-- FOR PREDICTIONS -->
-          <% if (predictions && predictions.length > 0) { %> <div class="row justify-content-center mt-5">
-            <div class="px-5 progress-div"><% predictions.forEach(function(prediction) { %> <div class="mb-3">
-                <div class="progress-title">SDG <%= prediction.sdg %>: <%= prediction.sdg %> </div>
-                <div class="d-flex align-items-center" style="height: 1.75rem;">
-                  <div class="progress flex-grow-1 position-relative" style="height: 1.75rem;">
-                    <div class="progress-bar bg-success d-flex align-items-center" role="progressbar" style="width: <%= prediction.percentage %>%;">
-                      <span class="position-absolute start-0 ps-3 text-black"><%= prediction.percentage.toFixed(2) %>% </span>
+                <% if (predictions && predictions.length > 0) { %>
+                    <div class="row justify-content-center mt-5">
+                    <div class="px-5 progress-div">
+                        <% predictions.forEach(function(prediction) { %>
+                        <div class="mb-3">
+                            <div class="progress-title" data-sdg-id="<%= prediction.sdg %>">
+                            SDG <%= prediction.sdg %>: Loading...
+                            </div>
+                            <div class="d-flex align-items-center" style="height: 1.75rem;">
+                            <div class="progress flex-grow-1 position-relative" style="height: 1.75rem;">
+                                <div class="progress-bar bg-success d-flex align-items-center" role="progressbar"
+                                style="width: <%= prediction.percentage %>%;">
+                                <span class="position-absolute start-0 ps-3 text-black"><%= prediction.percentage.toFixed(2) %>%</span>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="ms-3">
+                            <p class="mt-1 text-muted small">Aligned words: <em><%= prediction.aligned_words.join(", ") %></em></p>
+                            </div>
+                        </div>
+                        <% }); %>
                     </div>
-                  </div>
-                </div>
-                <div class="ms-3">
-                  <p class="mt-1 text-muted small">Aligned words: <em><%= prediction.aligned_words.join(", ") %> </em>
-                  </p>
-                </div>
-              </div><% }); %> </div>
-          </div><% } %>
+                    </div>
+                <% } %>
+  
         </div>
       </section>
     </main>
@@ -114,4 +123,21 @@
     <script src="assets/js/vanilla-zoom.js"></script>
     <script src="assets/js/theme.js"></script>
   </body>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      fetch("/sdgs.json")
+        .then(response => response.json())
+        .then(sdgs => {
+          document.querySelectorAll("[data-sdg-id]").forEach(el => {
+            const sdgId = parseInt(el.getAttribute("data-sdg-id"));
+            const sdg = sdgs.find(item => item.id === sdgId);
+            if (sdg) {
+              el.textContent = `SDG ${sdg.id}: ${sdg.title}`;
+            }
+          });
+        })
+        .catch(error => console.error("Error loading SDG data:", error));
+    });
+  </script>
+  
 </html>

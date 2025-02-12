@@ -25,11 +25,14 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
       <link rel="stylesheet" href="assets/css/News-Cards-4-Columns-v2.css">
       <link rel="stylesheet" href="assets/css/vanilla-zoom.min.css">
+      
    </head>
    <body>
+      <script src="assets/js/index.js"></script>
+
       <%- include('partials/header.ejs') %>
       <main class="page landing-page">
-         <section class="clean-block clean-hero" style="background-image:url(&quot;assets/img/scenery/image6.jpg&quot;);color:rgba(9, 162, 255, 0.85);">
+         <section class="clean-block clean-hero" style="background-image:url(&quot;assets/img/scenery/slu-maryheights.jpg&quot;);color:rgba(9, 162, 255, 0.85);">
             <div class="text">
                <h2>Automated SDG Report Alignment Assessment</h2>
                <p>Effortlessly analyze your organization's sustainability reports to align with the United Nations' Sustainable Development Goals.<br></p>
@@ -38,63 +41,20 @@
          </section>
          <section id="sdgSection" class="clean-block clean-info dark">
             <div class="container">
-               <div class="block-heading">
-                  <h2 class="text-info">Sustainable Development Goals</h2>
-                  <p>The 17 SDGs, established by the United Nations, aim to address global challenges such as poverty, inequality, and climate change by 2030.<br></p>
-               </div>
-               <div class="row align-items-center">
-                  <div class="container">
-                     <div class="row" id="putSdgsHere">
-                        <div class="col-md-6 col-lg-4 col-xl-3">
-                           <div class="container">
-                              <div class="flip-card">
-                                  <div class="flip-card-inner">
-                                      <div class="flip-card-front"><img src="https://www.un.org/sustainabledevelopment/wp-content/uploads/2018/05/E_SDG-goals_icons-individual-rgb-01.png" width="300px" height="300px"></div>
-                                      <div class="flip-card-back">
-                                          <h1>SDG 1</h1>
-                                          <p>No Poverty</p>
-                                          <p>lorem ipsum</p>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4 col-xl-3">
-                           <div class="container">
-                              <div class="flip-card">
-                                  <div class="flip-card-inner">
-                                      <div class="flip-card-front"><img src="https://www.un.org/sustainabledevelopment/wp-content/uploads/2018/05/E_SDG-goals_icons-individual-rgb-02.png" width="300px" height="300px"></div>
-                                      <div class="flip-card-back">
-                                          <h1>SDG 2</h1>
-                                          <p>No hunger</p>
-                                          <p>asdawd</p>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4 col-xl-3">
-                           <div class="container">
-                              <div class="flip-card">
-                                  <div class="flip-card-inner">
-                                      <div class="flip-card-front"><img src="https://www.un.org/sustainabledevelopment/wp-content/uploads/2018/05/E_SDG-goals_icons-individual-rgb-03.png" width="300px" height="300px"></div>
-                                      <div class="flip-card-back">
-                                          <h1>SDG 3</h1>
-                                          <p>Architect &amp; Engineer</p>
-                                          <p>We love that guy</p>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
+                <div class="block-heading">
+                    <h2 class="text-info">Sustainable Development Goals</h2>
+                    <p>The 17 SDGs, established by the United Nations, aim to address global challenges such as poverty, inequality, and climate change by 2030.</p>
+                </div>
+                <div class="row" id="putSdgsHere"></div>
             </div>
             <div class="row">
-                <div class="col d-lg-flex justify-content-lg-center"><button class="btn btn-outline-primary btn-lg text-center" type="button">Get Started!</button></div>
-             </div>
-         </section>
+                <div class="col d-lg-flex justify-content-lg-center">
+                  <a href="/analyze">
+                     <button class="btn btn-outline-primary btn-lg" type="button">Get Started!</button>
+                   </a>
+                </div>
+            </div>
+        </section>
          <section class="clean-block features">
             <div class="container">
                <div class="block-heading">
@@ -124,24 +84,16 @@
                   </div>
                </div>
                <div class="row">
-                  <div class="col d-lg-flex justify-content-lg-center"><button class="btn btn-outline-primary btn-lg text-center" type="button">Get Started!</button></div>
+                  <div class="col d-lg-flex justify-content-lg-center">
+                     <a href="/analyze">
+                        <button class="btn btn-outline-primary btn-lg" type="button">Get Started!</button>
+                      </a>
+                  </div>
                </div>
             </div>
          </section>
-         <section class="clean-block slider dark">
-            <div class="container">
-               <div class="block-heading">
-                  <h2 class="text-info">Slider</h2>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae leo.</p>
-               </div>
-               <div class="carousel slide" data-bs-ride="carousel" id="carousel-1">
-                  <div class="carousel-inner"></div>
-                  <div><a class="carousel-control-prev" href="#carousel-1" role="button" data-bs-slide="prev"></a><a class="carousel-control-next" href="#carousel-1" role="button" data-bs-slide="next"><span class="carousel-control-next-icon"></span><span class="visually-hidden">Next</span></a></div>
-                  <ol class="carousel-indicators"></ol>
-               </div>
-            </div>
-         </section>
-         <section class="clean-block about-us">
+      
+         <!-- <section class="clean-block about-us">
             <div class="container">
                <div class="block-heading">
                   <h2 class="text-info">About Us</h2>
@@ -180,7 +132,7 @@
                   </div>
                </div>
             </div>
-         </section>
+         </section> -->
       </main>
       <footer class="page-footer dark">
          <div class="footer-copyright">
