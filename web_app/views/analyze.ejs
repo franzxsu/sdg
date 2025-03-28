@@ -25,31 +25,32 @@
           </form>
 
           <!-- FOR PREDICTIONS -->
-                <% if (predictions && predictions.length > 0) { %>
-                    <div class="row justify-content-center mt-5">
-                    <div class="px-5 progress-div">
-                        <% predictions.forEach(function(prediction) { %>
-                        <div class="mb-3">
-                            <div class="progress-title" data-sdg-id="<%= prediction.sdg %>">
+          <% if (predictions && predictions.length > 0) { %>
+            <div class="row justify-content-center mt-5">
+                <div class="px-5 progress-div">
+                    <% predictions.forEach(function(prediction) { %>
+                    <div class="mb-3">
+                        <div class="progress-title fs-3" data-sdg-id="<%= prediction.sdg %>">
                             SDG <%= prediction.sdg %>: Loading...
-                            </div>
-                            <div class="d-flex align-items-center" style="height: 1.75rem;">
-                            <div class="progress flex-grow-1 position-relative" style="height: 1.75rem;">
-                                <div class="progress-bar bg-success d-flex align-items-center" role="progressbar"
-                                style="width: <%= prediction.percentage %>%;">
-                                <span class="position-absolute start-0 ps-3 text-black"><%= prediction.percentage.toFixed(2) %>%</span>
+                        </div>
+                        <div class="d-flex align-items-center" style="height: 2.25rem;">
+                            <div class="progress flex-grow-1 position-relative" style="height: 2.25rem;">
+                                <div class="progress-bar d-flex align-items-center progress-bar-animated" 
+                                     role="progressbar"
+                                     style="width: 0%; background-color: #78f268;"
+                                     data-percentage="<%= prediction.percentage %>">
+                                    <span class="position-absolute start-0 ps-3 fs-5 fw-bold text-dark"><%= prediction.percentage.toFixed(2) %>%</span>
                                 </div>
                             </div>
-                            </div>
-                            <div class="ms-3">
-                            <p class="mt-1 text-muted small">Aligned words: <em><%= prediction.aligned_words.join(", ") %></em></p>
-                            </div>
                         </div>
-                        <% }); %>
+                        <div class="ms-3">
+                            <p class="mt-1 text-muted medium"><strong>Aligned words:</strong> <em><%= prediction.aligned_words.join(", ") %></em></p>
+                        </div>
                     </div>
-                    </div>
-                <% } %>
-  
+                    <% }); %>
+                </div>
+            </div>
+        <% } %>
         </div>
       </section>
     </main>
@@ -124,6 +125,16 @@
     <script src="assets/js/theme.js"></script>
   </body>
   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+            const progressBars = document.querySelectorAll('.progress-bar');
+            progressBars.forEach(bar => {
+                const percentage = bar.getAttribute('data-percentage');
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.width = percentage + '%';
+                }, 100);
+            });
+        });
     document.addEventListener("DOMContentLoaded", () => {
       fetch("/sdgs.json")
         .then(response => response.json())
@@ -137,7 +148,8 @@
           });
         })
         .catch(error => console.error("Error loading SDG data:", error));
-    });
+    }
+  );
   </script>
   
 </html>
